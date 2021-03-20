@@ -23,6 +23,29 @@ print("Servidor HTTP/1.1 Inicializado")
 while True:
 	connectionSocket, addr = serverSocket.accept()
 	print("Cliente {} conectado ao servidor".format(addr))
+
+	#recebe solicitação vinda do cliente
+	requestUser = connectionSocket.recv(1024).decode()
+
+	#mensagem de boas vsindas para o cliente
+	envBV = "Olha quem apareceu por aqui! Então ", requestUser, " se você quiser que eu te chame de outro nome basta digitar abaixo, ou digite 1 para continuar com esse belissimo nome!"
+	
+	envBV = str(" ".join(envBV)).encode()
+	connectionSocket.send(envBV)
+
+
+
+	#Recebe a opcao de nome do cliente
+	requestOpcao = connectionSocket.recv(1024).decode()
+
+	if(requestOpcao!= "1"):
+    		requestUser = requestOpcao
+
+	#Envia nova mensagem para o cliente com as instruções a serem seguidas
+	respBV = "Ok ", requestUser , "!!! De agora em diante, digite Alex antes de qualquer conversa"
+	respBV = str(" ".join(respBV)).encode()
+	connectionSocket.send(respBV)
+
 	while True:
 		#recebe solicitação vinda do cliente
 		request = connectionSocket.recv(1024).decode()
@@ -32,7 +55,8 @@ while True:
 			j=0
 			for i in range(1,len(clientDoubt)):
 				if clientDoubt[i]=='ola' or clientDoubt[i]=='Ola' or clientDoubt[i]=='olá' or clientDoubt[i]=='Olá' :
-					response = ('Olá! Tudo bem?').encode()
+					response = 'Olá!', requestUser,' Tudo bem?'
+					response = str(" ".join(response)).encode()
 					connectionSocket.send(response)
 					j+=1
 				elif clientDoubt[i]=='tudo' or clientDoubt[i]=='Tudo' :
