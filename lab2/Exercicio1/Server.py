@@ -40,7 +40,14 @@ while True:
 					connectionSocket.send(response)
 					j+=1
 				elif clientDoubt[i]=='horas' or clientDoubt[i]=='horário' or clientDoubt[i]=='horario':
-					horario = "São exatamente " + str( datetime.now().strftime('%H:%M'))
+
+					horario = datetime.now()
+					if 0<=horario.hour<=5 or 18<=horario.hour<=23:
+						horario = "São exatamente " + str( datetime.now().strftime('%H:%M')) + "! Boa Noite!"
+					elif 6<=horario.hour<=12 :
+						horario = "São exatamente " + str( datetime.now().strftime('%H:%M')) + "! Bom Dia!"
+					elif 13<=horario.hour<=17 :
+						horario = "São exatamente " + str( datetime.now().strftime('%H:%M')) + "! Boa Tarde!"
 					response = ( horario ).encode()
 					connectionSocket.send(response)
 					j+=1

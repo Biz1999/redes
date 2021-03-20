@@ -15,7 +15,6 @@ while True:
     modifiedSentence = clientSocket.recv(1024).decode()
     print("Alex:", modifiedSentence)
     errorDetection = modifiedSentence.split()
-    print(errorDetection)
     j = True if "ERRO" in errorDetection else False
     if j != False:
         break
