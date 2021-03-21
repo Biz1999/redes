@@ -28,7 +28,7 @@ while True:
 	requestUser = connectionSocket.recv(1024).decode()
 
 	#mensagem de boas vsindas para o cliente
-	envBV = "\n Olha quem apareceu por aqui! \n\n  Então ", requestUser, " se você quiser que eu te chame de outro nome basta digitar abaixo, ou digite 1 para continuar com esse belissimo nome! \n\n"
+	envBV = "\n Olha quem apareceu por aqui! \n  Então ", requestUser, " se você quiser que eu te chame de outro nome basta digitar abaixo, ou digite 1 para continuar com esse belissimo nome! \n"
 	
 	envBV = str(" ".join(envBV)).encode()
 	connectionSocket.send(envBV)
@@ -42,7 +42,7 @@ while True:
     		requestUser = requestOpcao
 
 	#Envia nova mensagem para o cliente com as instruções a serem seguidas
-	respBV = "\n Ok ", requestUser , "!!! De agora em diante, digite Alex antes de qualquer conversa \n\n"
+	respBV = "\n Ok ", requestUser , "!!! De agora em diante, digite Alex antes de qualquer conversa \n"
 	respBV = str(" ".join(respBV)).encode()
 	connectionSocket.send(respBV)
 
@@ -67,23 +67,23 @@ while True:
 					elif 13<=horario.hour<=17 :
 						horario = "Boa Tarde!"
 
-					response = '\n Olá!', requestUser,'!!!', horario , ' tudo bem? \n\n'
+					response = '\n Olá!', requestUser,'!!!', horario , ' tudo bem? \n'
 					response = str(" ".join(response)).encode()
 					connectionSocket.send(response)
 					j+=1
 				elif clientDoubt[i]=='tudo' or clientDoubt[i]=='Tudo' :
-					response = ('\n Ótimo! \n \n ').encode()
+					response = ('\n Ótimo! \n ').encode()
 					connectionSocket.send(response)
 					j+=1
 				elif clientDoubt[i]=='horas' or clientDoubt[i]=='horário' or clientDoubt[i]=='horario':
 
 					horario = datetime.now()
 					if 18<=horario.hour<=23:
-						horario = "\n São exatamente " + str( datetime.now().strftime('%H:%M')) + "! Boa Noite! \n \n "
+						horario = "\n São exatamente " + str( datetime.now().strftime('%H:%M')) + "! Boa Noite! \n  "
 					elif 0<=horario.hour<=5 or 6<=horario.hour<=12 :
-						horario = "\n São exatamente " + str( datetime.now().strftime('%H:%M')) + "! Bom Dia! \n \n "
+						horario = "\n São exatamente " + str( datetime.now().strftime('%H:%M')) + "! Bom Dia! \n  "
 					elif 13<=horario.hour<=17 :
-						horario = "\n São exatamente " + str( datetime.now().strftime('%H:%M')) + "! Boa Tarde! \n\n  "
+						horario = "\n São exatamente " + str( datetime.now().strftime('%H:%M')) + "! Boa Tarde! \n  "
 					response = ( horario ).encode()
 					connectionSocket.send(response)
 					j+=1
