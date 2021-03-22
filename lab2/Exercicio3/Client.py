@@ -38,8 +38,8 @@ while True:
     modifiedSentence = clientSocket.recv(1024).decode()
     print("Alex:", modifiedSentence)
     errorDetection = modifiedSentence.split()
-    j = True if "ERRO" in errorDetection else False
-    if j != False:
-        break
+    shutDown = ['ERRO','até', 'Até', 'logo']
 
+    if any(i in errorDetection for i in shutDown):
+        break
 clientSocket.close()

@@ -2,6 +2,7 @@
 
 from socket import *
 from datetime import *
+import sys
 
 #define qual o so   cket irá escutar
 serverPort = 12000
@@ -39,7 +40,7 @@ while True:
 	requestOpcao = connectionSocket.recv(1024).decode()
 
 	if(requestOpcao!= "1"):
-    		requestUser = requestOpcao
+		requestUser = requestOpcao
 
 	#Envia nova mensagem para o cliente com as instruções a serem seguidas
 	respBV = "\n Ok ", requestUser , "!!! De agora em diante, digite Alex antes de qualquer conversa \n"
@@ -47,17 +48,15 @@ while True:
 	connectionSocket.send(respBV)
 
 	while True:
-    		#recebe solicitação vinda do cliente
+		#recebe solicitação vinda do cliente
 		request = connectionSocket.recv(1024).decode()
 		#quebra cada palavra da requisição
 		clientDoubt = request.split()
 		if clientDoubt[0] == "Alex":
 			j=0
+			#Verifica a mensagem enviada pelo cliente
 			for i in range(1,len(clientDoubt)):
-    				
-
 				if str(clientDoubt[i]).upper() in ('BOM' ,'BOA') or clientDoubt[i]=='ola' or clientDoubt[i]=='Ola' or clientDoubt[i]=='olá' or clientDoubt[i]=='Olá' :
-    					
 					#Cumprimento de boa tarde, bom dia ou boa noite
 					horario = datetime.now()
 					if 18<=horario.hour<=23:
@@ -66,17 +65,19 @@ while True:
 						horario = "Bom Dia!"
 					elif 13<=horario.hour<=17 :
 						horario = "Boa Tarde!"
-
 					response = '\n Olá!', requestUser,'!!!', horario , ' tudo bem? \n'
 					response = str(" ".join(response)).encode()
 					connectionSocket.send(response)
 					j+=1
+
+				#Responde ao cliente caso seja perguntado tudo bem?; Ou como uma resposta 'tudo' ao tudo bem
 				elif clientDoubt[i]=='tudo' or clientDoubt[i]=='Tudo' :
 					response = ('\n Ótimo! \n ').encode()
 					connectionSocket.send(response)
 					j+=1
+				
+				#Responde ao cliente o horário no momento da pergunta, sincronizando com um Boa Noite/Tarde/Dia
 				elif clientDoubt[i]=='horas' or clientDoubt[i]=='horário' or clientDoubt[i]=='horario':
-
 					horario = datetime.now()
 					if 18<=horario.hour<=23:
 						horario = "\n São exatamente " + str( datetime.now().strftime('%H:%M')) + "! Boa Noite! \n  "
@@ -87,6 +88,12 @@ while True:
 					response = ( horario ).encode()
 					connectionSocket.send(response)
 					j+=1
+
+				#Verifica se o cliente quer encerrar o programa, caso sim, finaliza o cliente
+				elif clientDoubt[i]=='tchau' or clientDoubt[i]=='Tchau' or clientDoubt[i]=='TCHAU' or clientDoubt[i]=='até' or clientDoubt[i]=='ate':
+					response = ('\n Até logo ! \n ').encode()
+					connectionSocket.send(response)
+					break
 			
 			if j==0:
 				print("Comando não pode ser interpretado por esse servidor!")
@@ -103,3 +110,4 @@ while True:
 			break
 			
 	connectionSocket.close()
+	sys.exit(0)

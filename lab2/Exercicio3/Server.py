@@ -24,12 +24,18 @@ while True:
     if pid == 0:
         serverSocket.close()
         print("Conectado por {} na porta {}".format(addr[0], addr[1]))
+
+        #recebe solicitação vinda do cliente
         requestUser = connectionSocket.recv(1024).decode()
+
+        #mensagem de boas vsindas para o cliente
         envBV = "Olha quem apareceu por aqui! \n  Então ", requestUser, " se você quiser que eu te chame de outro nome basta digitar abaixo, ou digite 1 para continuar com esse belissimo nome! \n"
         envBV = str(" ".join(envBV)).encode()
         connectionSocket.send(envBV)
+
 		# Recebe a opcao de nome do cliente
         requestOpcao = connectionSocket.recv(1024).decode()
+
         if(requestOpcao != "1"):
             requestUser = requestOpcao
 		# Envia nova mensagem para o cliente com as instruções a serem seguidas
@@ -43,6 +49,8 @@ while True:
             clientDoubt = request.split()
             if clientDoubt[0] == "Alex":
                 j = 0
+                
+                #Verifica a mensagem enviada pelo cliente
                 for i in range(1, len(clientDoubt)):
                     if str(clientDoubt[i]).upper() in ('BOM', 'BOA') or clientDoubt[i] == 'ola' or clientDoubt[i] == 'Ola' or clientDoubt[i] == 'olá' or clientDoubt[i] == 'Olá':
                         # Cumprimento de boa tarde, bom dia ou boa noite
@@ -58,12 +66,15 @@ while True:
                         response = str(" ".join(response)).encode()
                         connectionSocket.send(response)					
                         j+=1
+
+                    #Responde ao cliente caso seja perguntado tudo bem?; Ou como uma resposta 'tudo' ao tudo bem
                     elif clientDoubt[i]=='tudo' or clientDoubt[i]=='Tudo' :
                         response = ('\n Ótimo! \n').encode()
                         connectionSocket.send(response)
                         j+=1
+                    
+                    #Responde ao cliente o horário no momento da pergunta, sincronizando com um Boa Noite/Tarde/Dia
                     elif clientDoubt[i]=='horas' or clientDoubt[i]=='horário' or clientDoubt[i]=='horario':
-
                         horario = datetime.now()
                         if 0<=horario.hour<=5 or 18<=horario.hour<=23:
                             horario = "São exatamente " + str( datetime.now().strftime('%H:%M')) + "! Boa Noite! \n"
@@ -74,6 +85,12 @@ while True:
                         response = ( horario ).encode()
                         connectionSocket.send(response)
                         j+=1
+                    #Verifica se o cliente quer encerrar o programa, caso sim, finaliza o cliente
+                    elif clientDoubt[i]=='tchau' or clientDoubt[i]=='Tchau' or clientDoubt[i]=='TCHAU' or clientDoubt[i]=='até' or clientDoubt[i]=='ate':
+                        response = ('\n Até logo ! \n ').encode()
+                        connectionSocket.send(response)
+                        sys.exit(0)
+                        break
                 if j==0:
                     print("Comando não pode ser interpretado por esse servidor!")
                     # crio uma mensagem de erro e envio ao cliente

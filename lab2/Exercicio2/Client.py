@@ -1,5 +1,7 @@
 from socket import *
 serverName = 'localhost'
+
+
 #cria socket TCP, porta
 #remota # 12000
 serverPort = 12000
@@ -15,6 +17,8 @@ while True:
     
     sentence = input("Insira os valores e a operação (1 + 1): ")
     sentence = sentence.split()
+
+    #Determina qual operação será realizada com oque o cliente inseriu
     if "+" in sentence : 
         sentence = "SOMA " +sentence[0] + " " + sentence[2]
 
@@ -27,13 +31,15 @@ while True:
     elif "/" in sentence:
         sentence = "DIVISÃO " +sentence[0] + " " + sentence[2]
     
+    #Caso não seja uma operação válida encerra o cliente
     else:
         print("Operação não consegue ser interpretada")
         break
 
+    #formata a mensagem
     print("Mensagem enviada à Calculadora:", sentence)
-    sen = sentence.encode()#formata a mensagem
-    clientSocket.send(sen)#chama encode para mandar  
+    sen = sentence.encode()#chama encode para mandar  
+    clientSocket.send(sen)
 
     modifiedSentence = clientSocket.recv(1024).decode()
     print("RESPOSTA DA CALCULADORA:", modifiedSentence, "\n")
