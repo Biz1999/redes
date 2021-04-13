@@ -8,17 +8,26 @@ from datetime import datetime
 # data e horário
 date = (f'{datetime.now():%m-%Y %H:%M}')
 
+nome = ''
+
 # codigo da página
 page = f'''<!DOCTYPE HTML>\n<html> 
         <body>
             <h1>This is THE WEB PAGE</h1> 
             <br>
             Hello World!
+            <form method='POST'>
+                <label style='background-color:red'>Primeiro nome:</label><br>
+                <input type="text" id="fname"><br>
+                <label for="lname">Sobrenome:</label><br>
+                <input type="text" id="lname"><br><br>
+                <input type="submit" value="Submit">
+            </form> 
             <br>{date}<br>
+            {nome}
         </body>
         </html>\r\n\r\n'''
 
-page = codecs.open("teste.html", 'r')
 
 page404 = '''<!DOCTYPE HTML>\n<html>
         <body>
@@ -100,6 +109,5 @@ while True:
             response += page
         else:
             response += page404
-        print(response)
         connectionSocket.send(response.encode())
 
