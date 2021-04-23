@@ -41,23 +41,40 @@ while True:
 
         if request[0] == "GET":
 
-            params = request[1]
             if request[1] == '/' and len(request) > 4:
                 params = request[4]
-            # print(request)
+                # print(request)
+                if params == f'localhost:{serverPort}':
+                    response = "\nHTTP/1.1 200 OK\r\n"
+                else:
+                    response = "\nHTTP/1.1 404\r\n"
+                response += data_formatada 
+                response += "Connection: Keep-Alive\r\n"
+                response += "Content-Type:text/html; charset=UTF-8\r\n\r\n"
+                if params == f'localhost:{serverPort}':
+                    response += sendPage('', 0)
+                else:
+                    response += sendPage('', 1)
+                connectionSocket.send(response.encode())
+            else:
+                response = ''
+                image = request[1]
+                image = image[image.find('.')+1:]
+                print(image)
+                if request[4]== f'localhost:{serverPort}':
+                    response += "\nHTTP/1.1 200 OK\r\n"
+                    response += data_formatada 
+                    response += "Connection: Keep-Alive\r\n"
+                    if image == 'jpg' :
+                        response += "Content-Type:image/jpeg\r\n\r\n"
+                        """ image = request[1]
+                        image = image[image.find('/')+1:]
+                        image_to_read = open(image, 'rb')
+                        image_read = image_to_read.read()
+                        response += str(image_read) """
+                        connectionSocket.send(response.encode())
+                    
 
-            if params == f'localhost:{serverPort}':
-                response = "\nHTTP/1.1 200 OK\r\n"
-            else:
-                response = "\nHTTP/1.1 404\r\n"
-            response += data_formatada 
-            response += "Connection: Keep-Alive\r\n"
-            response += "Content-Type:text/html; charset=UTF-8\r\n\r\n"
-            if params == f'localhost:{serverPort}':
-                response += sendPage('', 0)
-            else:
-                response += sendPage('', 1)
-            connectionSocket.send(response.encode())
 
         if request[0] == "POST":
 
