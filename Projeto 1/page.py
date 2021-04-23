@@ -168,6 +168,7 @@ def sendPage( nomes, error ):
             <h1>This is THE WEB PAGE</h1> 
             <br>
             Hello World!
+            <img src='haruhi.jpg' width='100%' height='100%'>
             <form method='POST'>
                 <div class='omrs-input-group'>
                     <label class="omrs-input-underlined">

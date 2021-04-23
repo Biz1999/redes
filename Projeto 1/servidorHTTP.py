@@ -67,12 +67,13 @@ while True:
                     response += "Connection: Keep-Alive\r\n"
                     if image == 'jpg' :
                         response += "Content-Type:image/jpeg\r\n\r\n"
-                        """ image = request[1]
+                        image = request[1]
                         image = image[image.find('/')+1:]
                         image_to_read = open(image, 'rb')
                         image_read = image_to_read.read()
-                        response += str(image_read) """
+                        #response += str(image_read) 
                         connectionSocket.send(response.encode())
+                        connectionSocket.send(image_read)
                     
 
 
