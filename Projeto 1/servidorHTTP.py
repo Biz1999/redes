@@ -1,8 +1,10 @@
 # HTTP/1.1 server template
-import socket
 import sys
-from datetime import datetime
+import codecs
+import socket
 from page import sendPage
+from datetime import datetime
+from filterDataToArray import filterDataToArray
 
 
 currentTime = datetime.now()
@@ -58,6 +60,9 @@ while True:
             response += "Connection: Keep-Alive\r\n\r\n"
             if params == f'localhost:{serverPort}' and request[1] == '/':
                 response += sendPage('', 0)
+                # page = codecs.open("home.html", "r", "utf-8")
+                # page = page.read()
+                # response += page
             elif params != f'localhost:{serverPort}':
                 response += sendPage('', 1)
 
@@ -76,12 +81,9 @@ while True:
                 params = request[4]
 
             params2 = request[-1]
+            # print(params2)
 
-            params_post = params2.split("&")
-            params_fname = params_post[0][params2.find('=') + 1:]
-            params_lname = params_post[1][params2.find('=') + 1:]
-
-            nomes.append([params_fname, params_lname])
+            nomes = filterDataToArray(params2, nomes)
 
             print("Post type request, posting to {}".format(params))
             if params == f'localhost:{serverPort}':
@@ -93,6 +95,8 @@ while True:
             response += "Connection: Keep-Alive\r\n\r\n"
             if params == f'localhost:{serverPort}':
                 response += sendPage(nomes, 0)
+                # page = codecs.open("home.html", "r", "utf-8")
+                # response+=page.read()
             else:
                 response += sendPage('', 1)
             connectionSocket.send(response.encode())

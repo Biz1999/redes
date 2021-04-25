@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+    <script>
+        function myFunction() {
+            const name = document.getElementByName("fname");
+            const sobreNome = document.getElementByName("lname");
+            document.getElementById("name").innerHTML = name;
+            document.getElementById("lname").innerHTML = sobreNome;
+
+        }
+    </script>
+</head>
+
+<body>
+    <h1>testee</h1>
+    <form method='POST'>
+        <label style='background-color:red'>Primeiro nome:</label><br>
+        <input type="text" name="fname"><br>
+        <label>Sobrenome:</label><br>
+        <input type="text" name="lname">
+        <br><br>
+        <input type="button" value="Submit" onclick="myFunction()">
+    </form>
+    <table style="width:75%">
+        <tr style="width:75%">
+            <th>Nome</th>
+            <th>Sobrenome</th>
+        </tr>
+        <tr style="text-align:center">
+            <td id='name'></td>
+            <td id='lname'></td>
+        </tr>
+    </table>
+</body>
+
+</html>
