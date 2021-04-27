@@ -45,13 +45,13 @@ def sendPage(nomes, error):
 
     # data e horário
     date = (f'{datetime.now():%m-%Y %H:%M}')
-    css = open('styles.css')
     # código da página
     page = f'''<!DOCTYPE HTML>\n
         <html>
         <head>
             <title>Home</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1.0">
+            <link rel="icon" href="data:;base64,iVBORw0KGgo=">
             <script>
                 let btn = document.querySelector("button");
 
@@ -81,10 +81,6 @@ def sendPage(nomes, error):
                     border-style: solid;
                     color:#8630a8;
                     background-color: #fff;
-                }}
-
-                .grid:hover{{
-                    transform: scale(1.1);
                 }}
 
                 .formTitle{{
@@ -278,6 +274,7 @@ def sendPage(nomes, error):
             <h1 style='text-align:center'>ESCOLHA UM DOS FORMULÁRIOS</h1> 
             <br>
             <br>
+            <img src='haruhi.jpg' width="300" height="300">
             <div style='display:flex;width:100%;justify-content:space-around'>
                 <div class='grid'>
                 <label class='formTitle'><b>ADICIONA</b> pessoa</label>
