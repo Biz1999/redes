@@ -1,4 +1,4 @@
-<img src="images/icon.png" align="right" width="150" height="150" />
+<img src="images/icon.png" align="right" width="100" height="150" />
 
 # PROJETO 1 - SERVER EM PYTHON SEM BIBLIOTECAS
 
