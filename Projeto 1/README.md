@@ -2,7 +2,7 @@
 
 # PROJETO 1 - SERVER EM PYTHON SEM BIBLIOTECAS
 
-Projeto desenvolvido na matéria de Tópicos Avançados de Redes de Computadores com o intuíto de implementar um servidor HTTP/1.1, capaz de interpretar alguns comandos ( GET, POST, PUT e DELETE).
+Projeto desenvolvido na matéria de Tópicos Avançados de Redes de Computadores com o intuito de implementar um servidor HTTP/1.1, capaz de interpretar alguns comandos ( GET, POST, PUT e DELETE).
 
 ### Integrantes
 
