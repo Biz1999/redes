@@ -3,7 +3,7 @@ from modules.page import sendErrorPage
 
 class GET:
     @staticmethod
-    def response(request, server, nomes, connection):
+    def response(request, server, connection):
         params = request[1]
         uri= {
             '/' : 'Content-Type:text/html; charset=utf-8',
@@ -54,12 +54,3 @@ class GET:
         
         connection.send(response.encode())
 
-
-        if 'jpg' in request[1]:
-            image = request[1]
-            image = image[image.find('/')+1:]
-            image_to_read = open(image, 'rb')
-            image_read = image_to_read.read()
-            connection.send(image_read)
-    
-        

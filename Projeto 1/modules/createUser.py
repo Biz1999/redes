@@ -7,8 +7,7 @@ def create_user_page(filename="db/Server.json"):
 
     with open(filename) as json_file:
         data = json.load(json_file)
-        index = len(data['users']) 
-        print(index)
+        index = data['count']
         urn = rd(0, 9999)
         new_file = f'pages/users/{urn}.html'
         with open(new_file, 'w', encoding="utf-8") as new:

@@ -39,14 +39,13 @@
         </div>
         <div class='grid'>
             <label class='formTitle'><b>ATUALIZA</b> usuário</label>
-            <form method='POST' autocomplete="off">
+                <div autocomplete="off">
                 <label class="field field_v1">
                     <input class="field__input" list="user_ids" id='update_id' placeholder="ID">
                     <span class="field__label-wrap">
                         <span class="field__label">ID</span>
                     </span>
                     
-
                 </label>
                 <label class="field field_v1">
                     <input class="field__input" placeholder="Islanzin" id="update_fname">
@@ -61,20 +60,26 @@
                         <span class="field__label">Sobrenome</span>
                     </span>
                 </label>
-                <input type="submit" class="btn-submit" value="Submit">
-            </form>
+                <label class="field field_v2">
+                    <input class="field__input" placeholder="uri da imagem de perfil" id="update_img">
+                    <span class="field__label-wrap">
+                        <span class="field__label">URI</span>
+                    </span>
+                </label>
+                <input type="submit" class="btn-submit" value="Submit" onclick="updateRequest()">
+                </div>
         </div>
         <div class='grid'>
             <label class='formTitle'><b>DELETA</b> usuário</label>
-            <form method='POST' autocomplete="off">
+            <div autocomplete="off">
                 <label class="field field_v1">
-                    <input class="field__input" list="user_ids" name='delete_id' placeholder="ID">
+                    <input class="field__input" list="user_ids" id='delete_id' placeholder="ID">
                     <span class="field__label-wrap">
                         <span class="field__label">ID</span>
                     </span>
                 </label>
-                <input type="submit" class="btn-submit" value="Submit">
-            </form>
+                <input type="submit" class="btn-submit" value="Submit" onclick="deleteRequest()">
+            </div>
         </div>
         <datalist id="user_ids">
         </datalist>
@@ -127,12 +132,12 @@
                                     //CONSTRUCTION OF ROWS HAVING
                                     // DATA FROM JSON OBJECT
                                     users += `<tr style="text-align:center">
-                                                <td>${key}</td>
+                                                <td>${value.id}</td>
                                                 <td>${value.nome}</td>
                                                 <td>${value.sobrenome}</td>
                                                 <td><a href=${value.uri}>Profile</a></td>
                                             </tr>`;
-                                    datalist += `<option value=${key}>`
+                                    datalist += `<option value=${value.id}>`
                                 }
                             })
                         };
@@ -147,25 +152,32 @@
     </script>
     <script>
         function sendRequest(){
-            var nome = $("#new_fname").val();
-            var sobrenome = $("#new_lname").val();
+            var nome = $.trim($("#new_fname").val());
+            var sobrenome = $.trim($("#new_lname").val());
             var img = $("#new_img").val();
             var newName = { nome: nome, sobrenome: sobrenome, img: img }
-            
-            newData = JSON.stringify(newName);
+            const newData = JSON.stringify(newName);
+            console.log(newData)
             POST(newData)
         }
     </script>
     <script>
         function updateRequest(){
             var id = $("#update_id").val();
-            var nome = $("#update_fname").val();
-            var sobrenome = $("#update_lname").val();
+            var nome = $.trim($("#update_fname").val());
+            var sobrenome = $.trim($("#update_lname").val());
             var img = $("#update_img").val();
-            var newName = { nome: nome, sobrenome: sobrenome, img: img }
+            var updateName = { nome: nome, sobrenome: sobrenome, img: img, id: id}
             
-            newData = JSON.stringify(newName);
-            POST(newData)
+            const updateData = JSON.stringify(updateName);
+            PUT(updateData);
+        }
+    </script>
+    <script>
+        function deleteRequest(){
+            console.log("to aqui")
+            var id = $("#delete_id").val();
+            DELETE(id);
         }
     </script>
     <script>
@@ -189,7 +201,8 @@
         }
     </script>
     <script>
-        const PUT = ( newData ) => {
+        const PUT = ( updateData ) => {
+            const data = updateData
             let xhr = new XMLHttpRequest(),
                 method = 'PUT',
                 url = '/';
@@ -205,7 +218,27 @@
             };
             xhr.open(method, url, true);
             xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(newData);
+            xhr.send(data);
+        }
+    </script>
+    <script>
+        const DELETE = ( deleteData ) => {
+            console.log('deletar')
+            const data = deleteData;
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    loadDoc();
+                    $(':input', '.grid')
+                        .not(':button, :submit, :reset, :hidden')
+                        .val('')
+                        .removeAttr('checked')
+                        .removeAttr('selected');
+                }
+            };
+            xhr.open('DELETE', '/', true);
+            xhr.setRequestHeader("Content-Type", "text/plain");
+            xhr.send(data);
         }
     </script>
 

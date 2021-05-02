@@ -6,6 +6,7 @@ def write_json(newData, filename="db/Server.json"):
         data = json.load(json_file)
         newData['id'], newData['uri'] = create_user_page()
         data['users'].append(newData)
+        data['count'] +=1
     with open(filename, 'w') as f:
         json.dump(data, f, indent=4)
     

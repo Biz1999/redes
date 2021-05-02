@@ -6,6 +6,7 @@ from Server import *
 from responses.Get import GET
 from responses.Post import POST
 from responses.Put import PUT
+from responses.Delete import DELETE
 
 
 class ControlRequest(Thread):
@@ -13,7 +14,6 @@ class ControlRequest(Thread):
     def __init__(self, server):
         Thread.__init__(self)
         self.server = server
-        self.nomes = []
 
     def run(self):
 
@@ -30,13 +30,16 @@ class ControlRequest(Thread):
                 print(f'Requisição: {request}')
 
                 if request[0] == "GET":
-                    GET.response(request, self.server, self.nomes, connectionSocket)
+                    GET.response(request, self.server, connectionSocket)
 
                 elif request[0] == "POST":
-                    POST.response(request, self.server, self.nomes, connectionSocket)
+                    POST.response(request, self.server, connectionSocket)
 
                 elif request[0] == "PUT":
-                    PUT.response(request, self.server, self.nomes, connectionSocket)
+                    PUT.response(request, self.server, connectionSocket)
+
+                elif request[0] == "DELETE":
+                    DELETE.response(request, self.server, connectionSocket)
 
                 connectionSocket.close()
 

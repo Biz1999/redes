@@ -16,6 +16,7 @@ def sendPage( urn ):
 <html>
 <head>
     <meta charset="utf-8">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
     <!--  All snippets are MIT license http://bootdey.com/license -->
     <title>Usuário {urn}</title>
@@ -73,7 +74,7 @@ def sendPage( urn ):
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
-                        <span class="text-secondary" id="fullname"></span>
+                        <span class="text-secondary" id="fb_fullname"></span>
                     </li>
                     </ul>
                 </div>
@@ -140,8 +141,11 @@ def sendPage( urn ):
                 if (value.uri === href) {{
                     nome = value.nome;
                     sobrenome = value.sobrenome;
+                    fullname = `${{nome}} ${{sobrenome}}`;
+
                     $('#name').text(`${{nome}}`);
-                    $('#fullname').text(`${{nome}} ${{sobrenome}}`);
+                    $('#fullname').text(fullname);
+                    $('#fb_fullname').text(fullname);
                     $('.rounded-circle').attr("src",value.img);
                 }}            
             }})

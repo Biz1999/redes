@@ -7,7 +7,7 @@ import json
 class POST:
 
     @staticmethod
-    def response(request, server, nomes, connection):
+    def response(request, server, connection):
         params = request[1]
         if request[1] == '/' and len(request) > 4:
             params = request[4]
@@ -25,7 +25,7 @@ class POST:
         response += server.data
         response += "Connection: keep-alive\r\n\r\n"
         if params != f'localhost:{server.port}':
-            response += sendPage(nomes, 1)
+            response += sendPage(1)
 
         connection.send(response.encode())
         
