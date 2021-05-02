@@ -5,6 +5,7 @@ from datetime import datetime
 from Server import *
 from responses.Get import GET
 from responses.Post import POST
+from responses.Put import PUT
 
 
 class ControlRequest(Thread):
@@ -18,25 +19,24 @@ class ControlRequest(Thread):
 
         while True:
             connectionSocket, addr = self.server.serverSocket.accept()
-            print("Client {} connected to server".format(addr))
         
             # Recebe a requisição
             request = connectionSocket.recv(1024).decode()
 
-            if not request:
-                break
-            else:
+            if request:
                 # quebrando request
-                request = request.split()
 
-                
+                request = request.split()
                 print(f'Requisição: {request}')
 
                 if request[0] == "GET":
                     GET.response(request, self.server, self.nomes, connectionSocket)
 
-                if request[0] == "POST":
+                elif request[0] == "POST":
                     POST.response(request, self.server, self.nomes, connectionSocket)
+
+                elif request[0] == "PUT":
+                    PUT.response(request, self.server, self.nomes, connectionSocket)
 
                 connectionSocket.close()
 

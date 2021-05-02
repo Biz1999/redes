@@ -1,0 +1,214 @@
+<html>
+<head>
+    <title>Home</title>
+    <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" href='styles.css'>
+
+</head>
+
+<body>
+    <h1 style='text-align:center'>ESCOLHA UM DOS FORMULÁRIOS</h1>
+    <br>
+    <br>
+    <div style='display:flex;width:100%;justify-content:space-around'>
+        <div class='grid'>
+            <label class='formTitle'><b>ADICIONA</b> usuário</label>
+            <div autocomplete="off">
+                <label class="field field_v1">
+                    <input class="field__input" placeholder="Islanzin" id="new_fname">
+                    <span class="field__label-wrap">
+                        <span class="field__label">Nome</span>
+                    </span>
+                </label>
+                <br>
+                <label class="field field_v2">
+                    <input class="field__input" placeholder="Silva" id="new_lname">
+                    <span class="field__label-wrap">
+                        <span class="field__label">Sobrenome</span>
+                    </span>
+                </label>
+                <label class="field field_v2">
+                    <input class="field__input" placeholder="uri da imagem de perfil" id="new_img">
+                    <span class="field__label-wrap">
+                        <span class="field__label">URI</span>
+                    </span>
+                </label>
+                <input type="submit" class="btn-submit" value="Submit" onClick="sendRequest()">
+            </div>
+        </div>
+        <div class='grid'>
+            <label class='formTitle'><b>ATUALIZA</b> usuário</label>
+            <form method='POST' autocomplete="off">
+                <label class="field field_v1">
+                    <input class="field__input" list="user_ids" id='update_id' placeholder="ID">
+                    <span class="field__label-wrap">
+                        <span class="field__label">ID</span>
+                    </span>
+                    
+
+                </label>
+                <label class="field field_v1">
+                    <input class="field__input" placeholder="Islanzin" id="update_fname">
+                    <span class="field__label-wrap">
+                        <span class="field__label">Nome</span>
+                    </span>
+                </label>
+                <br>
+                <label class="field field_v2">
+                    <input class="field__input" placeholder="Silva" id="update_lname">
+                    <span class="field__label-wrap">
+                        <span class="field__label">Sobrenome</span>
+                    </span>
+                </label>
+                <input type="submit" class="btn-submit" value="Submit">
+            </form>
+        </div>
+        <div class='grid'>
+            <label class='formTitle'><b>DELETA</b> usuário</label>
+            <form method='POST' autocomplete="off">
+                <label class="field field_v1">
+                    <input class="field__input" list="user_ids" name='delete_id' placeholder="ID">
+                    <span class="field__label-wrap">
+                        <span class="field__label">ID</span>
+                    </span>
+                </label>
+                <input type="submit" class="btn-submit" value="Submit">
+            </form>
+        </div>
+        <datalist id="user_ids">
+        </datalist>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;margin-top:2rem">
+        <table id='table'></table>
+    </div>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            loadDoc();
+            let href = getCurentFileName();
+            console.log(href);
+        });
+    </script>
+    <script>
+        function getCurentFileName() {
+                var pagePathName = window.location.pathname;
+                return pagePathName.substring(pagePathName.lastIndexOf("/") + 1);
+        }
+        function loadDoc() {
+            $.getJSON("Server.json",
+                function (data) {
+                    {
+                        var users = `
+                            <table style="width:60%;border-collapse: collapse;table-layout: fixed;font-size:20px" id="table">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Sobrenome</th>
+                                    <th>Links</th>
+                                </tr>`;
+                        datalist = '<datalist id="user_ids">';
+                        if ( data.users.length==0 || data.users == null ) {
+                            users += `
+                                <tr style="text-align:center">
+                                    <td>NULL</td>
+                                    <td>NULL</td>
+                                    <td>NULL</td>
+                                    <td>NULL</td>
+                                </tr>`;
+                            datalist += `<option value="NULL">`
+                            /* datalist += "<option value=NULL>" */
+                        }
+                        else{
+                            // ITERATING THROUGH OBJECTS
+                            $.each(data.users, function (key, value) {
+                                {
+                                    //CONSTRUCTION OF ROWS HAVING
+                                    // DATA FROM JSON OBJECT
+                                    users += `<tr style="text-align:center">
+                                                <td>${key}</td>
+                                                <td>${value.nome}</td>
+                                                <td>${value.sobrenome}</td>
+                                                <td><a href=${value.uri}>Profile</a></td>
+                                            </tr>`;
+                                    datalist += `<option value=${key}>`
+                                }
+                            })
+                        };
+                        datalist += '</datalist>';
+                        users += '</table>';
+                        //INSERTING ROWS INTO TABLE 
+                        $('#table').replaceWith(users);
+                        $('#user_ids').replaceWith(datalist);
+                    }
+                });
+        }
+    </script>
+    <script>
+        function sendRequest(){
+            var nome = $("#new_fname").val();
+            var sobrenome = $("#new_lname").val();
+            var img = $("#new_img").val();
+            var newName = { nome: nome, sobrenome: sobrenome, img: img }
+            
+            newData = JSON.stringify(newName);
+            POST(newData)
+        }
+    </script>
+    <script>
+        function updateRequest(){
+            var id = $("#update_id").val();
+            var nome = $("#update_fname").val();
+            var sobrenome = $("#update_lname").val();
+            var img = $("#update_img").val();
+            var newName = { nome: nome, sobrenome: sobrenome, img: img }
+            
+            newData = JSON.stringify(newName);
+            POST(newData)
+        }
+    </script>
+    <script>
+        const POST = ( newData ) => {
+            let xhr = new XMLHttpRequest(),
+                method = 'POST',
+                url = '/';
+            xhr.onload = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    loadDoc();
+                    $(':input', '.grid')
+                        .not(':button, :submit, :reset, :hidden')
+                        .val('')
+                        .removeAttr('checked')
+                        .removeAttr('selected');
+                }
+            };
+            xhr.open(method, url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(newData);
+        }
+    </script>
+    <script>
+        const PUT = ( newData ) => {
+            let xhr = new XMLHttpRequest(),
+                method = 'PUT',
+                url = '/';
+            xhr.onload = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    loadDoc();
+                    $(':input', '.grid')
+                        .not(':button, :submit, :reset, :hidden')
+                        .val('')
+                        .removeAttr('checked')
+                        .removeAttr('selected');
+                }
+            };
+            xhr.open(method, url, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(newData);
+        }
+    </script>
+
+</body>
+
+</html>
