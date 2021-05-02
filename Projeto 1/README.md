@@ -32,17 +32,17 @@ Ex: https://www.petlove.com.br/dicas/wp-content/uploads/2018/05/golden-idoso.jpg
 
 Ao clicar em profile uma nova requisição GET é solicitada, será possível ver a página do usuário referente aquele nome
 
-<img src="images/POST.gif" height="400" />
+<img src="images/POST.GIF" height="400" />
 
 ## PUT
 
 Todas as requisições para atualização do PUT, ao selecionar o ID o mesmo será atualizado (nome, sobrenome, img), ficar atento a imagem novamente
 
-<img src="images/PUT.gif" height="400" />
+<img src="images/PUT.GIF" height="400" />
 
 ## DELETE
 
 Todas as requisições para remover algum conteúdo passam ao DELETE, ao selecionar o ID o mesmo será deletado junto ao seu profile
 
-<img src="images/DELETE.gif" height="400" />
+<img src="images/DELETE.GIF" height="400" />
 
