@@ -1,8 +1,8 @@
 img[src*="#thumbnail"] {
      width:150px;
      height:100px;
-     align: right;
+     float: right;
 }
-img[src*="#GET"] {
+img[src*="#IMAGE"] {
      height:400px;
 }
