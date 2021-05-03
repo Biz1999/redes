@@ -25,7 +25,7 @@ python main.py
 
 Todas as requisições de páginas e arquivos( css e json ) são realizadas no GET, então quando iniciado no navegador <b>'localhost:8081/'</b> no terminal é possível ver as solicitações:
 
-![GET](https://github.com/lukaskunn/redes/blob/main/Projeto%201/images/GET.gif#IMAGE)
+![GET](https://github.com/lukaskunn/redes/blob/main/Projeto%201/images/GET.gif)
 
 ## POST
 
@@ -34,7 +34,7 @@ Ex: https://www.petlove.com.br/dicas/wp-content/uploads/2018/05/golden-idoso.jpg
 
 Ao clicar em profile uma nova requisição GET é solicitada, será possível ver a página do usuário referente aquele nome
 
-![POST](https://github.com/lukaskunn/redes/blob/main/Projeto%201/images/POST.GIF#IMAGE)
+![POST](https://github.com/lukaskunn/redes/blob/main/Projeto%201/images/POST.GIF)
 
 
 ## PUT
@@ -42,10 +42,10 @@ Ao clicar em profile uma nova requisição GET é solicitada, será possível ve
 Todas as requisições para atualização do PUT, ao selecionar o ID o mesmo será atualizado (nome, sobrenome, img), ficar atento a imagem novamente
 
 
-![PUT](https://github.com/lukaskunn/redes/blob/main/Projeto%201/images/PUT.GIF#IMAGE)
+![PUT](https://github.com/lukaskunn/redes/blob/main/Projeto%201/images/PUT.GIF)
 
 ## DELETE
 
 Todas as requisições para remover algum conteúdo passam ao DELETE, ao selecionar o ID o mesmo será deletado junto ao seu profile
 
-![DELETE](https://github.com/lukaskunn/redes/blob/main/Projeto%201/images/DELETE.GIF#IMAGE)
+![DELETE](https://github.com/lukaskunn/redes/blob/main/Projeto%201/images/DELETE.GIF)
