@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" media="all" href="https://github.com/lukaskunn/redes/blob/main/Projeto%201/images/styles.css" />
 
-![readme](https://github.com/lukaskunn/redes/blob/main/Projeto%201/images/icon.png#thumbnail)
+![readme](https://github.com/lukaskunn/redes/blob/main/Projeto%201/images/icon.png)
 
 # PROJETO 1 - SERVER EM PYTHON SEM BIBLIOTECAS
 
