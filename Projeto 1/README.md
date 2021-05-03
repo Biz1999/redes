@@ -1,4 +1,6 @@
-<img src="images/icon.png" align="right" width="100" height="150" />
+<link rel="stylesheet" type="text/css" media="all" href="https://github.com/lukaskunn/redes/blob/main/Projeto%201/images/styles.css" />
+
+![readme](https://github.com/lukaskunn/redes/blob/main/Projeto%201/images/icon.png#thumbnail)
 
 # PROJETO 1 - SERVER EM PYTHON SEM BIBLIOTECAS
 
@@ -6,10 +8,10 @@ Projeto desenvolvido na matéria de Tópicos Avançados de Redes de Computadores
 
 ### Integrantes
 
-ISLAN SILVA FIGUEREDO       &emsp;&emsp;&emsp;&emsp;&emsp;                          RA: 22.119.027-5 <br />
-LUCAS DA SILVA OLIVEIRA     &emsp;&emsp;&emsp;&emsp;&nbsp;                          RA: 22.119.031-7 <br />
-ALESSANDRO BIZ              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;        RA: 22.119.038-2 <br />
-IVAN SANCHEZ TUZITA         &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;        RA: 22.119.040-8 <br />
+* ISLAN SILVA FIGUEREDO       &emsp;&emsp;&emsp;&emsp;&emsp;                          RA: 22.119.027-5 <br />
+* LUCAS DA SILVA OLIVEIRA     &emsp;&emsp;&emsp;&emsp;&nbsp;                          RA: 22.119.031-7 <br />
+* ALESSANDRO BIZ              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;        RA: 22.119.038-2 <br />
+* IVAN SANCHEZ TUZITA         &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;        RA: 22.119.040-8 <br />
 
 ## Início
 Primeira coisa ao baixar o arquivo é iniciar do diretório Projeto1 o arquivo <b>main.py</b>
@@ -45,4 +47,3 @@ Todas as requisições para atualização do PUT, ao selecionar o ID o mesmo ser
 Todas as requisições para remover algum conteúdo passam ao DELETE, ao selecionar o ID o mesmo será deletado junto ao seu profile
 
 <img src="images/DELETE.GIF" height="400" />
-
