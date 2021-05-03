@@ -21,7 +21,7 @@ python main.py
 
 ## GET
 
-Todas as requisições de páginas e arquivos( css e json ) são realizadas no GET, então quando iniciado no navegador 'localhost:8081/' no terminal é possível ver as solicitações:
+Todas as requisições de páginas e arquivos( css e json ) são realizadas no GET, então quando iniciado no navegador <b>'localhost:8081/'</b> no terminal é possível ver as solicitações:
 
 <img src="images/GET.gif" height="400" />
 
