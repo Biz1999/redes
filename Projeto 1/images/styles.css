@@ -3,3 +3,6 @@ img[src*="#thumbnail"] {
      height:100px;
      align: right;
 }
+img[src*="#GET"] {
+     height:400px;
+}
