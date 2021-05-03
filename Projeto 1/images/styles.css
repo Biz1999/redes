@@ -1,4 +1,4 @@
-img[src*="#thumbnail"] {
+img[alt="readme"] {
      width:150px;
      height:100px;
      float: right;
