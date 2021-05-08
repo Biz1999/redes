@@ -182,11 +182,11 @@
     </script>
     <script>
         const POST = ( newData ) => {
-            let xhr = new XMLHttpRequest(),
+            let xml = new XMLHttpRequest(),
                 method = 'POST',
                 url = '/';
-            xhr.onload = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            xml.onload = function () {
+                if (xml.readyState === XMLHttpRequest.DONE && xml.status === 200) {
                     loadDoc();
                     $(':input', '.grid')
                         .not(':button, :submit, :reset, :hidden')
@@ -195,19 +195,19 @@
                         .removeAttr('selected');
                 }
             };
-            xhr.open(method, url, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(newData);
+            xml.open(method, url, true);
+            xml.setRequestHeader("Content-Type", "application/json");
+            xml.send(newData);
         }
     </script>
     <script>
         const PUT = ( updateData ) => {
             const data = updateData
-            let xhr = new XMLHttpRequest(),
+            let xml = new XMLHttpRequest(),
                 method = 'PUT',
                 url = '/';
-            xhr.onload = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            xml.onload = function () {
+                if (xml.readyState === XMLHttpRequest.DONE && xml.status === 200) {
                     loadDoc();
                     $(':input', '.grid')
                         .not(':button, :submit, :reset, :hidden')
@@ -216,18 +216,18 @@
                         .removeAttr('selected');
                 }
             };
-            xhr.open(method, url, true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(data);
+            xml.open(method, url, true);
+            xml.setRequestHeader("Content-Type", "application/json");
+            xml.send(data);
         }
     </script>
     <script>
         const DELETE = ( deleteData ) => {
             console.log('deletar')
             const data = deleteData;
-            let xhr = new XMLHttpRequest();
-            xhr.onload = function () {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            let xml = new XMLHttpRequest();
+            xml.onload = function () {
+                if (xml.readyState === XMLHttpRequest.DONE && xml.status === 200) {
                     loadDoc();
                     $(':input', '.grid')
                         .not(':button, :submit, :reset, :hidden')
@@ -236,9 +236,9 @@
                         .removeAttr('selected');
                 }
             };
-            xhr.open('DELETE', '/', true);
-            xhr.setRequestHeader("Content-Type", "text/plain");
-            xhr.send(data);
+            xml.open('DELETE', '/', true);
+            xml.setRequestHeader("Content-Type", "text/plain");
+            xml.send(data);
         }
     </script>
 

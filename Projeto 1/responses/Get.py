@@ -44,13 +44,16 @@ class GET:
             json = open('db/Server.json', 'r')
             response += json.read()
             json.close()
-        elif addr != f'localhost:{server.port}':
-            response += sendErrorPage()
-        elif addr == f'localhost:{server.port}' and int(uri_user):
-            with open(f"pages/users/{uri_user}.html", "r", encoding='utf-8') as f:
-                text = f.read()
-            response += text
-            f.close()
+        else:
+            try:
+                link = int(uri_user)
+                if addr == f'localhost:{server.port}' and link:
+                    with open(f"pages/users/{uri_user}.html", "r", encoding='utf-8') as f:
+                        text = f.read()
+                response += text
+                f.close()
+            except:
+                response += sendErrorPage()
         
         connection.send(response.encode())
 
